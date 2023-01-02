@@ -17,7 +17,7 @@ const filterUpdateNotebooks = (item) => {
 
 const testCellOutputs = async (
     page: IJupyterLabPageFixture,
-    tmpPath: string
+    tmpPath: string,
 ) => {
     const paths = klaw(path.resolve(__dirname, './notebooks'), {
         filter: (item) => !filterUpdateNotebooks(item),
@@ -52,7 +52,7 @@ const testCellOutputs = async (
 
         for (let c = 0; c < numCellImages; ++c) {
             expect(results[c]).toMatchSnapshot(
-                getCaptureImageName(notebook, c)
+                getCaptureImageName(notebook, c),
             );
         }
 
@@ -94,7 +94,7 @@ const testUpdates = async (page: IJupyterLabPageFixture, tmpPath: string) => {
 
         for (let i = 0; i < cellCount; i++) {
             expect(results[i]).toMatchSnapshot(
-                getCaptureImageName(notebook, i)
+                getCaptureImageName(notebook, i),
             );
         }
 
@@ -106,7 +106,7 @@ test.describe('ipympl Visual Regression', () => {
     test.beforeEach(async ({ page, tmpPath }) => {
         await page.contents.uploadDirectory(
             path.resolve(__dirname, './notebooks'),
-            tmpPath
+            tmpPath,
         );
         await page.filebrowser.openDirectory(tmpPath);
     });
